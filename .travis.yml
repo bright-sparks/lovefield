@@ -32,6 +32,7 @@ before_script:
 script:
   - >
     if [[ $SELENIUM_BROWSER == builder* ]]; then
+      travis_stop_sauce_connect
       tools/builder.sh;
     elif [ "$SELENIUM_BROWSER" == "chrome" ]; then
       gulp test --target=tests;
