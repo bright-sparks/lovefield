@@ -18,7 +18,7 @@ env:
     - SELENIUM_BROWSER=chrome
     - SELENIUM_BROWSER=firefox
     - SELENIUM_BROWSER=ie
-    - SELENIUM_BROWSER=safari
+      #    - SELENIUM_BROWSER=safari
 
 addons:
   sauce_connect:
@@ -33,8 +33,10 @@ script:
   - >
     if [[ $SELENIUM_BROWSER == builder* ]]; then
       tools/builder.sh;
-    else
+    elif [ "$SELENIUM_BROWSER" == "chrome" ]; then
       gulp test --target=tests;
+    else
+      gulp test --target=tests --filter=-min_js
     fi
 
 notifications:
